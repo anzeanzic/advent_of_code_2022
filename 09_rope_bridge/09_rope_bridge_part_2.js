@@ -10,6 +10,7 @@ for (let i = 0; i < KNOTS_COUNT; i++) {
 	knots.push({ x: 0, y: 0 });
 }
 
+
 const inputStream = fs.createReadStream(input_path);
 const lineReader = readline.createInterface({
 	input: inputStream,

@@ -49,25 +49,26 @@ const HandleLines = (line) => {
 };
 
 const CompareArr = () => {
+	console.log(leftArr.length);
+
+	// iterate over all pairs
 	for (let i = 0; i < leftArr.length; i++) {
+		console.log("------ PAIR " + (i + 1) + " ------");
 		const leftPacket = leftArr[i];
 		const rightPacket = rightArr[i];
 		
 		//console.log(leftPacket, rightPacket,);
-		console.log("------ PAIR " + (i + 1) + " ------");
-
+		
 		/*if (leftPacket.length === 0 && rightPacket.length > 0) {
 			indicesInRightOrder.push(i + 1);
 			continue;
 		}*/
 
-		for (let p = 0; p < leftPacket.length; p++) {
-			const result = Compare(leftPacket, rightPacket, i, true);
-			if (result === 1) {
-				indicesInRightOrder.push(i + 1);
-				console.log('RIGHT ORDER');
-				break;
-			}
+		// iterate over packet
+		const result = Compare(leftPacket, rightPacket, i, false);
+		if (result === 1) {
+			indicesInRightOrder.push(i + 1);
+			console.log('RIGHT ORDER');
 		}
 	}
 };
@@ -76,7 +77,7 @@ const Compare = (leftPacket, rightPacket, i, isSub) => {
 	const len = leftPacket.length > rightArr.length ? leftPacket.length : rightArr.length;
 
 	for (let p = 0; p < len; p++) {
-		console.log('Compare ' + leftPacket[p] + ' vs ' + rightPacket[p], p, isSub, len);
+		console.log('Compare ' + JSON.stringify(leftPacket[p]) + ' vs ' + JSON.stringify(rightPacket[p]), p, isSub, leftPacket.length, rightPacket.length);
 
 		if (leftPacket[p] == undefined && rightPacket[p] != undefined) return 1;
 		else if (leftPacket[p] != undefined && rightPacket[p] == undefined) return -1;
@@ -87,7 +88,7 @@ const Compare = (leftPacket, rightPacket, i, isSub) => {
 		}
 		else if (Array.isArray(leftPacket[p]) && Array.isArray(rightPacket[p])) {
 			console.log("array");
-			const result = Compare(leftPacket[p], rightPacket[p], i, false);
+			const result = Compare(leftPacket[p], rightPacket[p], i, true);
 			if (result !== 0) return result;
 		}
 		/*else {
