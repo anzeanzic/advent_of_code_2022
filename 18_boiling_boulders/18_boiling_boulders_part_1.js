@@ -11,7 +11,6 @@ const lineReader = readline.createInterface({
 	terminal: false,
 });
 
-
 lineReader.on("line", function (line) {
 	HandleLines(line);
 });
